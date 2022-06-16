@@ -1,0 +1,12 @@
+PRIO 1
+1) Text besorgen
+2) Text säubern
+3) Fensterfunktion, die sich mit einer Breite n über den Text schiebt
+
+PRIO 2 für ein Modell
+4) Erstellen eines Modells
+5) Trainieren des Models
+6) Testen des Models
+
+PRIO 3 nach ersten Model
+7) Interaction
