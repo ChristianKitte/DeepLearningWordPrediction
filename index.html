@@ -54,21 +54,26 @@
                     <em>Der Sourcecode ist bei GitHub einsehbar</em>
                 </a>
             </p>
+            <p id="on-load-string" class="fs-5 on-load-pending">
+                Noch kein Modell ausgewählt...
+            </p>
         </div>
     </nav>
 
     <!-- Bootsrap Nav -->
     <ul class="nav nav-tabs nav-fill">
-        <li class="nav-item active">
-            <a class="nav-link" href="#lösung1" data-bs-toggle="tab" aria-current="page">
-                <p class="h2">Lösung 1</p>
-            </a>
-        </li>
         <li class="nav-item">
-            <a class="nav-link" href="#lösung2" data-bs-toggle="tab">
-                <p class="h2">Lösung 2</p>
+            <a class="nav-link" href="#lösung2" data-bs-toggle="tab" aria-current="page">
+                <p class="h2">Lösung</p>
             </a>
         </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="#lösung1" data-bs-toggle="tab">
+                <p class="h2">Textcorpus und Architektur</p>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="#dokumentation" data-bs-toggle="tab">
                 <p class="h2">Dokumentation</p>
@@ -83,7 +88,8 @@
             <div class="row">
                 <div class="row" id="info-text1">
                     <p class="fs-5 output-text">
-                        InfoText
+                        An dieser Stelle erhalten Sie weitere Informationen zu den verfügbaren
+                        Neuronalen Netzen sowie den Trainingsdaten.
                     </p>
                 </div>
 
@@ -103,16 +109,49 @@
             <div class="row">
                 <div class="row" id="info-text2">
                     <p class="fs-5 output-text">
-                        Lösungstext 2
+                        Auf der linken Seite können Sie eines der möglichen Modelle auswählen. Auf der
+                        rechten Seite können sie einen beliebigen Text eingeben. Während der Eingabe
+                        werden in der Zeile darüber Vorschläge zur nächsten Eingabe oder dem nächsten
+                        Wort gemacht.
                     </p>
                 </div>
 
                 <div class="col">
-                    linke Spalte
+                    <div class="net-config" id="select-model">
+                        <div class="simulation-config dropdown">
+                            <label class="form-label" for="model-type">Welches Modell soll verwendet
+                                werden?</label>
+                            <select class="form-select" id="model-type" aria-label="Default select example">
+                                <option selected>Bitte wählen sie den Typ aus:</option>
+                                <option value="1">Modell 1</option>
+                                <option value="2">Modell 2</option>
+                                <option value="3">Modell 3</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-outline-primary" onclick="loadModel();">
+                            Modell laden
+                        </button>
+                    </div>
+                    <div class="net-config" id="info-model">
+                        <p class="fs-5 output-text">
+                            Das ausgewählte Model....
+                        </p>
+                    </div>
                 </div>
 
                 <div class="col">
-                    rechte Spalte
+                    <div class="mb-3">
+
+                        <ul class="list-inline" id="listPrediction">
+                            <li class="list-inline-item">keine Vorhersagen</li>
+                        </ul>
+                        <textarea class="form-control" id="freeTextInput"
+                                  placeholder="Bitte geben Sie einen Text ein..." rows="5"></textarea>
+                        <button class="btn btn-outline-primary" onclick="clearTextInput();">
+                            Text löschen
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,6 +281,9 @@
         crossorigin="anonymous"></script>
 
 <!-- App Scrips -->
+<script src="./scripts/Model.js"></script>
+<script src="./scripts/Anwendungsdaten.js"></script>
+<script src="./scripts/UIHandler.js"></script>
 <script src="./scripts/main.js"></script>
 
 </body>

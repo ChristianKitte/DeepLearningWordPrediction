@@ -1,1 +1,5 @@
-tf.slic
+/**
+ * Initialisiert die Anwendung
+ */
+setInitialValue();
+
