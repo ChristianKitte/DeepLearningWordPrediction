@@ -8,9 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="danfojs" level="application" />
-    <orderEntry type="library" name="d3.v7" level="application" />
     <orderEntry type="library" name="plotly-2.12.1" level="application" />
+    <orderEntry type="library" name="plotly-2.12.1" level="application" />
+    <orderEntry type="library" name="underscore" level="application" />
     <orderEntry type="library" name="@tensorflow/tfjs" level="application" />
+    <orderEntry type="library" name="@tensorflow" level="application" />
   </component>
 </module>

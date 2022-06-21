@@ -5,7 +5,7 @@ function setModel() {
     clearTextInput();
 
     setInfoText(currentNeuralNet);
-    loadModel(currentNeuralNet);
+    loadSavedModel(currentNeuralNet);
 }
 
 /**
@@ -23,14 +23,6 @@ function clearTextInput() {
 function setInfoText(id) {
     let infoString = document.getElementById("on-load-string");
 
-    infoString.textContent = "Das Model " + id + " wurde gelade";
+    infoString.textContent = "Das data " + id + " wurde gelade";
     infoString.classList.replace("on-load-pending", "on-load-done");
-}
-
-/**
- * Lädt das angeforderte Modell
- * @param modelID Die ID des Modells (Index des DropDown)
- */
-function loadModel(modelID) {
-    alert("loadModel");
 }

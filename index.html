@@ -15,7 +15,12 @@
     <!-- App CSS-->
     <link href="css/main.css" rel="stylesheet">
 
+    <!-- underscore.js -->
+    <!-- https://underscorejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/underscore@latest/underscore-umd-min.js"></script>
+
     <!-- d3.js -->
+    <!-- https://d3js.org/ -->
     <script type="text/javascript" src="https://d3js.org/d3.v7.min.js"></script>
 
     <!-- Plotly. -->
@@ -29,8 +34,8 @@
     <!-- Include Tensorflow.js und Tensorflow-vis. -->
     <!-- https://js.tensorflow.org/api/latest/ -->
     <!-- https://js.tensorflow.org/api_vis/latest/ -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
 </head>
 
 <body>
@@ -129,7 +134,7 @@
                             </select>
                         </div>
 
-                        <button class="btn btn-outline-primary" onclick="loadModel();">
+                        <button class="btn btn-outline-primary" onclick="setModel();">
                             Modell laden
                         </button>
                     </div>
@@ -281,9 +286,14 @@
         crossorigin="anonymous"></script>
 
 <!-- App Scrips -->
-<script src="./scripts/Model.js"></script>
+
+
+<script src="./data/words.js"></script>
+
+
+<script src="scripts/model.js"></script>
 <script src="./scripts/Anwendungsdaten.js"></script>
-<script src="./scripts/UIHandler.js"></script>
+<script src="scripts/uiHandler.js"></script>
 <script src="./scripts/main.js"></script>
 
 </body>
