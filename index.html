@@ -56,9 +56,13 @@
             </p>
             <p class="fs-5">
                 <a href="https://github.com/ChristianKitte/DeepLearningWordPrediction" target="_blank">
-                    <em>Der Sourcecode ist bei GitHub einsehbar</em>
+                    <em>Der Sourcecode sowie eine Kopie des zum Erstellen genutzten Notebook ist bei GitHub
+                        einsehbar</em>
                 </a>
             </p>
+
+        </div>
+        <div class="container-fluid">
             <p id="on-load-string" class="fs-5 on-load-pending">
                 Noch kein Modell ausgewählt...
             </p>
@@ -134,16 +138,38 @@
                             </select>
                         </div>
                     </div>
+
+                    <p class="fs-6 output-text">
+                        Die vorliegenden Modelle wurden auf Basis des unten zu sehenden Textes generiert. Es handelt
+                        sich um Reden von Donald Trump, welche vor dem Training aufbereitet wurden.
+                    </p>
+
+                    <p class="fs-6 output-text">
+                        Wer sich ebenfalls
+                        für die Reden interessiert, findet den Text auf
+                        <a href="https://github.com/ryanmcdermott/trump-speeches" target="_blank">GitHub</a>
+                        . Der Text kann auch direkt
+                        <a href="https://raw.githubusercontent.com/ryanmcdermott/trump-speeches/master/speeches.txt"
+                           target="_blank">hier</a>
+                        herunter geladen werden.
+                    </p>
+
+                    <div class="net-config" id="sample-text">
+                        <object width="100%" height="400px" type="text/plain" data="./data/textkorpus/Speech.txt">
+                        </object>
+                    </div>
                 </div>
 
                 <div class="col">
                     <div class="mb-3">
-
                         <ul class="list-inline" id="listPrediction">
                             <li class="list-inline-item">keine Vorhersagen</li>
                         </ul>
+
+                        <label for="freeTextInput"></label>
                         <textarea class="form-control" id="freeTextInput"
                                   placeholder="Bitte geben Sie einen Text ein..." rows="5"></textarea>
+
                         <button class="btn btn-outline-primary" onclick="clearTextInput();">
                             Text löschen
                         </button>
