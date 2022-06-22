@@ -4,8 +4,15 @@
 function setModel() {
     clearTextInput();
 
-    setInfoText(currentNeuralNet);
-    loadSavedModel(currentNeuralNet);
+    if (currentNeuralNet === 1) {
+        model = "./data/model/model.json";
+
+        setInfoText(model);
+        loadSavedModel(model);
+    } else {
+        model = "Noch kein Modell ausgewählt...";
+        setInfoText(model, true);
+    }
 }
 
 /**
@@ -18,11 +25,17 @@ function clearTextInput() {
 
 /**
  * Setzt den Infostraing für das geladene Modell
- * @param id Die ID des Infostrings
+ * @param name Die ID des Infostrings
+ * @param reset Wenn True, wird die Anzeige auf den Anfangszustand gesetzt. Default= False
  */
-function setInfoText(id) {
+function setInfoText(name, reset = false) {
     let infoString = document.getElementById("on-load-string");
 
-    infoString.textContent = "Das data " + id + " wurde gelade";
-    infoString.classList.replace("on-load-pending", "on-load-done");
+    if (reset === true) {
+        infoString.textContent = "Noch kein Modell ausgewählt...";
+        infoString.classList.replace("on-load-done", "on-load-pending");
+    } else {
+        infoString.textContent = "Das Modell " + name + " wurde gelade";
+        infoString.classList.replace("on-load-pending", "on-load-done");
+    }
 }

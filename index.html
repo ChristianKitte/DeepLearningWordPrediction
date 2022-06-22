@@ -129,19 +129,10 @@
                             <select class="form-select" id="model-type" aria-label="Default select example">
                                 <option selected>Bitte wählen sie den Typ aus:</option>
                                 <option value="1">Modell 1</option>
-                                <option value="2">Modell 2</option>
-                                <option value="3">Modell 3</option>
+                                <option disabled value="2">Modell 2</option>
+                                <option disabled value="3">Modell 3</option>
                             </select>
                         </div>
-
-                        <button class="btn btn-outline-primary" onclick="setModel();">
-                            Modell laden
-                        </button>
-                    </div>
-                    <div class="net-config" id="info-model">
-                        <p class="fs-5 output-text">
-                            Das ausgewählte Model....
-                        </p>
                     </div>
                 </div>
 
@@ -168,7 +159,15 @@
                     Verwendete Frameworks
                 </strong>
             </h5>
-
+            Keras
+            underscore https://underscorejs.org
+            matplotlib
+            Google Colab
+            nltk
+            sklearn
+            tensorflow
+            numpy
+            os
             <ul>
                 <li>
                     <h6>
@@ -285,13 +284,11 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
 
+<!-- Wordlist -->
+<script src="./data/model/words.js"></script>
+
 <!-- App Scrips -->
-
-
-<script src="./data/words.js"></script>
-
-
-<script src="scripts/model.js"></script>
+<script src="./scripts/model.js"></script>
 <script src="./scripts/Anwendungsdaten.js"></script>
 <script src="scripts/uiHandler.js"></script>
 <script src="./scripts/main.js"></script>

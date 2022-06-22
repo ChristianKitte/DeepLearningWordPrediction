@@ -1,4 +1,10 @@
 /**
+ * Das aktuell ausgewählte Netz
+ * @type {number}
+ */
+let currentNeuralNet = 0;
+
+/**
  * True, wenn das Netzwerk geladen wurde, ansonsten false
  * @type {boolean}
  */
@@ -12,14 +18,21 @@ let neuralNetwork
 /**
  * Lädt das angeforderte Modell
  * @param model Die ID des Modells (Index des DropDown)
- */
-async function loadSavedModel(model) {
-    model = "./data/model/model.json";
+ * @param reset Wenn True, wird die Anzeige auf den Anfangszustand gesetzt. Default= False
+ *  */
+async function loadSavedModel(model, reset = false) {
+    if (reset === true) {
+        neuralNetwork = "";
+        neuralNetworkLoaded = false;
 
-    return tf.loadLayersModel(model, false).then((model) => {
-        neuralNetwork = model;
-        neuralNetworkLoaded = true;
-    });
+    } else {
+        model = "./data/model/model.json";
+
+        return tf.loadLayersModel(model, false).then((model) => {
+            neuralNetwork = model;
+            neuralNetworkLoaded = true;
+        });
+    }
 }
 
 /**
@@ -27,21 +40,24 @@ async function loadSavedModel(model) {
  * @param predictionArray Der übergebene Text
  */
 function predict(predictionArray) {
-    console.log(predictionArray);
+    if (neuralNetworkLoaded) {
+        console.log(predictionArray);
 
-    let predictionResult;
+        let predictionResult;
 
-    tf.tidy(() => {
-        let input = tf.zeros([1, 40]);
-        let prediction = neuralNetwork.predict(input);
+        tf.tidy(() => {
+            let input = tf.zeros([1, 3]);
+            let prediction = neuralNetwork.predict(input);
 
-        predictionResult = prediction.dataSync();
-    });
+            predictionResult = prediction.dataSync();
+        });
 
 
+        console.log(predictionResult);
 
-    console.log(predictionResult);
-
-    return predictionResult;
+        return predictionResult;
+    } else {
+        console.log("Kein Netzwerk geladen");
+    }
 }
 

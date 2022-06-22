@@ -1,17 +1,8 @@
 /**
- * Das aktuelle neuronale Netz
- */
-let currentNeuralNet;
-
-/**
- * Aktueller String zur Vorhersage
- */
-let currentPredictionsString
-
-/**
  * Das nächste angefangene, aber nicht beendete Word
+ * @type {string}
  */
-let currentNextWord
+let currentNextWord = ""
 
 /**
  * Die komplette, aktuellen Vorhersagen für die letzten drei Wörter
@@ -35,7 +26,7 @@ d3.select('#freeTextInput')
     .on("input", function () {
         //funzt nicht: currentPredictionsString = +this.value;
 
-        currentPredictionsString = document.getElementById("freeTextInput").value;
+        let currentPredictionsString = document.getElementById("freeTextInput").value;
 
         if (currentPredictionsString.length > 1 && currentPredictionsString.lastIndexOf(" ") === currentPredictionsString.length - 1) {
             // Neues Word ist zu berücksichtigen ==> neue Vorhersage erstellen
@@ -100,19 +91,30 @@ function checkCurrentInput(word) {
 }
 
 /**
- * Setzt die initialen Werte der Oberfläche basierend auf den aktuellen Werten nach Abschluss des Ladevorgangs
- */
-function setInitialValue() {
-    // Auslesen der Dropdowns
-    currentNeuralNet = document.getElementById("model-type").selectedIndex;
-    currentNeuralNet = loadSavedModel
-}
-
-/**
  * Setzt die Vorschlagsliste mit den aktuelle Vorschlägen
  * @param werte Eine Liste mit Vorschlägen
- * @param id Die ID der Liste
+ * @param id Die ID der Unordered List
  */
 function setSuggestion(werte, id) {
-    // Vorhersagefeld füllen
+    let ul = document.getElementById("listPrediction");
+    ul.innerHTML = "";
+
+    let li = document.createElement('li');
+    li.classList.add("list-inline-item");
+    li.innerHTML = "";
+
+    ul.appendChild(li);
+
+    let count = 0;
+    werte.forEach((element) => {
+        if (count < 5) {
+            let li = document.createElement('li');
+            li.classList.add("list-inline-item");
+            li.innerHTML = element;
+
+            ul.appendChild(li);
+
+            count++;
+        }
+    });
 }
