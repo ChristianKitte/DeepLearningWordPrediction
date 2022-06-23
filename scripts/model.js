@@ -17,16 +17,37 @@ let neuralNetworkLoaded = false;
 let neuralNetwork
 
 /**
- * Zuordnung Zahl (key) zu Word (value)
+ * Zuordnung Zahl (key) zu Word (value) aus dem Training
  * @type {{}}
  */
 let intToWord = {};
 
 /**
- * Zuordnung Word (key) zu Zahl (value)
+ * Zuordnung Word (key) zu Zahl (value) aus dem Training
  * @type {{}}
  */
 let wordToInt = {};
+
+/**
+ * Die Größe des beim Training genutzten Fensters
+ * @type {number}
+ */
+let windowsSize = 3;
+
+/**
+ * Daten des aktuell verwendtes Netzes
+ * @type {{BreiteFenster: number, Accuracy: number, Epochen: number, AnzahlBatch: number, AnzahlZuordnung: number, AnzahlTrainingsdaten: number, Batches: number, AnzahlGewichte: number}}
+ */
+let model1_data = {
+    AnzahlZuordnung: 0,
+    AnzahlTrainingsdaten: 8565,
+    BreiteFenster: 3,
+    AnzahlGewichte: 959266,
+    Batches: 32,
+    AnzahlBatch: 268,
+    Epochen: 100,
+    Accuracy: 0.48
+}
 
 /**
  * Lädt das angeforderte Modell und erstellt die Zuordnungstabellen der Wörter / Token zu ihren Key
@@ -41,8 +62,6 @@ async function loadSavedModel(model, reset = false) {
         intToWord.clear();
         wordToInt.clear();
     } else {
-        model = "./data/model/model.json";
-
         return tf.loadLayersModel(model, false).then((model) => {
             neuralNetwork = model;
             neuralNetworkLoaded = true;
@@ -58,6 +77,8 @@ async function loadSavedModel(model, reset = false) {
 
             console.log(wordToInt);
             console.log(intToWord);
+
+            tfvis.show.modelSummary(document.getElementById("model-structure"), model);
         });
     }
 }
@@ -86,12 +107,12 @@ function convertToWord(intList, numberOfPreds) {
     let tokenList = [];
 
     // Mit Hilfe von Danfo.js ein Series erzeugen und inPlace sortieren
-    let Prediction = new dfd.Series(intList);
-    Prediction.sortValues({"ascending": false, "inplace": true});
-    Prediction.print();
+    let prediction = new dfd.Series(intList);
+    prediction.sortValues({"ascending": false, "inplace": true});
+    prediction.print();
 
     // Übernehmen des Index
-    let sf1Indexes = Prediction.index;
+    let sf1Indexes = prediction.index;
 
     for (let i = 0; i < numberOfPreds; i++) {
         let idx = i; // Index der Indexliste selbst
@@ -100,7 +121,7 @@ function convertToWord(intList, numberOfPreds) {
         let prop = intList[wordIdx]; // die Wahrscheinlichkeit für den idxten Eintrag
         let propPercent = prop * 100;
 
-        tokenList.push(word + " (" + propPercent.toFixed(4).toString() + ")");
+        tokenList.push(word + " (" + propPercent.toFixed(4).toString() + " %)");
     }
 
     return tokenList;
@@ -125,6 +146,10 @@ function predict(predictionArray) {
             predictionResult = prediction.dataSync();
         });
 
+        // Sichern der gesamten Vorhersage
+        currentGroundTruthPredictions = predictionResult;
+
+        // Formatierte Liste der letzten n Vorhersagen zurück geben
         resultList = convertToWord(predictionResult, 5);
 
         return resultList;

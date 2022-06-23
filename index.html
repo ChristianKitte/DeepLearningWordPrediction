@@ -34,7 +34,7 @@
     <!-- Include Tensorflow.js und Tensorflow-vis. -->
     <!-- https://js.tensorflow.org/api/latest/ -->
     <!-- https://js.tensorflow.org/api_vis/latest/ -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
 </head>
 
@@ -79,7 +79,7 @@
 
         <li class="nav-item active">
             <a class="nav-link" href="#lösung1" data-bs-toggle="tab">
-                <p class="h2">Textcorpus und Architektur</p>
+                <p class="h2">Verwendete Netzarchitektur</p>
             </a>
         </li>
 
@@ -93,35 +93,33 @@
     <!-- Content -->
     <div class="tab-content justify-content-center d-flex">
         <!-- Lösung1 -->
-        <div class="tab-pane fade show active" id="lösung1">
-            <div class="row">
-                <div class="row" id="info-text1">
-                    <p class="fs-5 output-text">
-                        An dieser Stelle erhalten Sie weitere Informationen zu den verfügbaren
-                        Neuronalen Netzen sowie den Trainingsdaten.
-                    </p>
-                </div>
-
-                <div class="row dataset-main-row">
-                    <div class="col">
-                        linke Spalte
-                    </div>
-                    <div class="col">
-                        rechte Spalte
-                    </div>
-                </div>
+        <div class="tab-pane fade show" id="lösung1">
+            <div class="row" id="model-structure">
+                <p class="fs-6">
+                    Struktur des gewählten Netzes:
+                </p>
             </div>
         </div>
 
         <!-- Lösung2 -->
-        <div class="tab-pane fade show" id="lösung2">
+        <div class="tab-pane fade show active" id="lösung2">
             <div class="row">
                 <div class="row" id="info-text2">
                     <p class="fs-5 output-text">
                         Auf der linken Seite können Sie eines der möglichen Modelle auswählen. Auf der
                         rechten Seite können sie einen beliebigen Text eingeben. Während der Eingabe
-                        werden in der Zeile darüber Vorschläge zur nächsten Eingabe oder dem nächsten
-                        Wort gemacht.
+                        werden in der Zeile darüber Vorschläge zur nächsten Eingabe in prozentual absteigender
+                        Reihenfolge der Wahrscheinlichkeit gemacht. Ein Wort ist erst abgeschlossen,
+                        wenn es durch ein Leerzeichen oder Zeilenumbruch unterbrochen wird.
+                    </p>
+                    <p class="fs-5 output-text">
+                        Weiter wird auf der linken Seite unten der Text, welcher dem Training zu Grunde lag,
+                        ausgegeben. Er kann genutzt werden, um die gemachten Vorhersagen zu evaluieren.
+                    </p>
+                    <p class="fs-5 output-text">
+                        Rechts unten werden die aktuell zur Vorhersage genutzten Wörter angezeigt. In der Spalte
+                        darunter das aktuelle, aber nicht abgeschlossene Wort. Dies wird zur Filterung der
+                        vorhergehenden Vorhersage der Empfehlungen genutzt.
                     </p>
                 </div>
 
@@ -132,9 +130,9 @@
                                 werden?</label>
                             <select class="form-select" id="model-type" aria-label="Default select example">
                                 <option selected>Bitte wählen sie den Typ aus:</option>
-                                <option value="1">Modell 1</option>
-                                <option disabled value="2">Modell 2</option>
-                                <option disabled value="3">Modell 3</option>
+                                <option value="1">Modell mit Accuracy: 0,48</option>
+                                <option disabled value="2">nicht belegt...</option>
+                                <option disabled value="3">nicht belegt...</option>
                             </select>
                         </div>
                     </div>
@@ -166,13 +164,40 @@
                             <li class="list-inline-item">keine Vorhersagen</li>
                         </ul>
 
-                        <label for="freeTextInput"></label>
+                        <label for="freeTextInput" id="prop-hint">
+                            (Vorhersage basierend auf der Eingabe. Angefangen mit der höchsten Wahrscheinlichkeit.)
+                        </label>
+
                         <textarea class="form-control" id="freeTextInput"
                                   placeholder="Bitte geben Sie einen Text ein..." rows="5"></textarea>
 
                         <button class="btn btn-outline-primary" onclick="clearTextInput();">
                             Text löschen
                         </button>
+
+                        <p class="fs-6 output-text">
+                            Nach jedem beendeten Wort erfolgt eine neue Suche. Ein Wort ist abgeschlossen, wenn der
+                            Nutzer ein Leerzeichen eingibt. Die Suche basiert auf den letzten drei Wörtern, welche
+                            hier zu sehen sind:
+                        </p>
+
+                        <label for="outArray" id="pred-string1">
+                            (Aktuell für die Vorhersage verwendete Wörter)
+                        </label>
+                        <textarea class="form-control" id="outArray" rows="1"
+                                  placeholder="Ausgabe der Wörter für die Vorhersage..." readonly></textarea>
+
+                        <p class="fs-6 output-text">
+                            Solange das aktuelle Wort nicht abgeschlossen ist, erfolgt keine neue Vorhersage. In diesen
+                            Fällen wird die letzte Vorhersage gefiltert und jeweils passende Vorhersagen angezeigt.
+                            Das aktuell verwendete Filterwort ist hier zu sehen:
+                        </p>
+
+                        <label for="outWord" id="pred-string2">
+                            (Aktuell für die Filterung verwendetes Wort)
+                        </label>
+                        <textarea class="form-control" id="outWord" rows="1" placeholder="Aktuelles Filterwort"
+                                  readonly></textarea>
                     </div>
                 </div>
             </div>
@@ -185,13 +210,9 @@
                     Verwendete Frameworks
                 </strong>
             </h5>
-            Keras
             underscore https://underscorejs.org
-            matplotlib
-            Google Colab
             nltk
             sklearn
-            tensorflow
             numpy
             os
             <ul>
@@ -228,7 +249,52 @@
                         <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>
                         anlehnt. Hierbei versucht es, möglichst gleichartige Interfaces bereit
                         zu stellen, um Pandas Benutzern einen einfachen Einstieg zu bieten. Einsatzgebiet ist wie
-                        bei Pandas die Vor- und Nachverarbeitung von Daten aller Art unter Javascript.
+                        bei Pandas die Vor- und Nachverarbeitung von Daten aller Art unter Javascript. Im Rahmen diese
+                        Anwendung wird die mächtige Implemetierung einer
+                        <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html" target="_blank">
+                            Pandas Series</a> für schnelle Sortierungen und Zugriffe auf die Ausgabe der Prediction
+                        verwendet.
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>
+                    </h6>
+                    <p class="fs-6">
+                        Google bietet - neben anderen Anbietern auch - die Möglichkeit, kostenlos mit einem online
+                        verfügbaren, leistungsstarken Jupyter Notebook zu arbeiten. Eine Verbindung zu Google Drive zur
+                        Sicherung seiner Arbeit ist hierbei ebenso möglich wie eigene Installationen z.B. via pip.
+                        Ebenso kann einfach eine Kopie auf GitHub hinterlegt und ausgeführt werden. In dieser Arbeit
+                        wurde die Umgebung für die Vorverarbeitung der Daten sowie das Erstellen des Models und dem
+                        anschließenden Training genutzt.
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://keras.io/" target="_blank">Keras</a>
+                    </h6>
+                    <p class="fs-6">
+                        Bei Keras handelt es sich um eine ursprünglich separate Python Framework, welche bei recht
+                        hoher Abstraktion die Arbeit mit Tensorflow unterstützt. Als Tensorflows "Haussprache" ist sie
+                        mittlerweile Teil des Tensorflow Frameworks. In dieser Lösung wird sie u.a. für den Zugriff auf
+                        Tensorflow und der Modellerstellung verwendet.
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://www.tensorflow.org/api_docs/python/tf" target="_blank">Tensorflow for
+                            Python</a>
+                    </h6>
+                    <p class="fs-6">
+                        Googles TensorFlow Framework bietet umfangreiche Funktionalität für die Erstellung von
+                        Anwendungen im Bereich der KI und eignet sich auch gut für die prototypische Entwicklung. Eine
+                        ausführliche API für Python findet sich
+                        <a href="https://www.tensorflow.org/api_docs/python/tf" target="_blank">hier.</a>
+                        Daneben werden C++, Java und andere Sprachen unterstützt. In dieser Lösung wurde es für die
+                        Entwicklung innerhalb des Jupyter Notebooks mit Python verwendet.
                     </p>
                 </li>
 
@@ -315,7 +381,7 @@
 
 <!-- App Scrips -->
 <script src="./scripts/model.js"></script>
-<script src="./scripts/Anwendungsdaten.js"></script>
+<script src="scripts/preprocessing.js"></script>
 <script src="scripts/uiHandler.js"></script>
 <script src="./scripts/main.js"></script>
 

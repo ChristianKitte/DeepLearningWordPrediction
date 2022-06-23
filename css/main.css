@@ -12,6 +12,11 @@
     margin-left: 10px;
 }
 
+#prop-hint, #pred-string1, #pred-string2 {
+    font-size: smaller;
+    font-style: italic;
+}
+
 .output-text {
     margin-top: 1em;
 }
@@ -24,6 +29,11 @@
 }
 
 #freeTextInput {
+    margin-bottom: 10px;
+}
+
+#outWord, #outArray {
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -52,4 +62,12 @@
 
 .dropdown {
     margin-bottom: 10px;
+}
+
+#model-structure{
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: khaki;
 }

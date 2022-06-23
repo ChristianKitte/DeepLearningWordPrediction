@@ -13,5 +13,6 @@
     <orderEntry type="library" name="underscore" level="application" />
     <orderEntry type="library" name="@tensorflow/tfjs" level="application" />
     <orderEntry type="library" name="@tensorflow" level="application" />
+    <orderEntry type="library" name="underscore" level="application" />
   </component>
 </module>
