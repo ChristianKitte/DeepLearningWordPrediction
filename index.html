@@ -109,11 +109,17 @@
                         Auf der linken Seite können Sie eines der möglichen Modelle auswählen. Auf der
                         rechten Seite können sie einen beliebigen Text eingeben. Während der Eingabe
                         werden in der Zeile darüber Vorschläge zur nächsten Eingabe in prozentual absteigender
-                        Reihenfolge der Wahrscheinlichkeit gemacht. Ein Wort ist erst abgeschlossen,
-                        wenn es durch ein Leerzeichen oder Zeilenumbruch unterbrochen wird.
+                        Reihenfolge der Wahrscheinlichkeit gemacht.
                     </p>
                     <p class="fs-5 output-text">
-                        Weiter wird auf der linken Seite unten der Text, welcher dem Training zu Grunde lag,
+                        Hierfür wird nach jedem abgeschlossenen Wort eine neu Vorhersage auf Basis der letzten drei
+                        Worte gemacht. Bei der Eingabe des folgenden, nächsten Wortes wird in dieser Vorhersage nach
+                        Wörter mit den gleichen Anfang wie das neue, nicht abgeschlossene Wort gesucht. Diese werden
+                        nach Wahrscheinlichkeit geordnet, ausgegeben. Ein Wort ist erst abgeschlossen, wenn es durch
+                        ein Leerzeichen oder Zeilenumbruch unterbrochen wird.
+                    </p>
+                    <p class="fs-5 output-text">
+                        Weiter wird auf der linken Seite unten der Text, welcher dem Training zugrunde lag,
                         ausgegeben. Er kann genutzt werden, um die gemachten Vorhersagen zu evaluieren.
                     </p>
                     <p class="fs-5 output-text">
@@ -130,7 +136,7 @@
                                 werden?</label>
                             <select class="form-select" id="model-type" aria-label="Default select example">
                                 <option selected>Bitte wählen sie den Typ aus:</option>
-                                <option value="1">Modell mit Accuracy: 0,48</option>
+                                <option value="1">Modell mit Accuracy: 0,5149</option>
                                 <option disabled value="2">nicht belegt...</option>
                                 <option disabled value="3">nicht belegt...</option>
                             </select>
@@ -210,11 +216,7 @@
                     Verwendete Frameworks
                 </strong>
             </h5>
-            underscore https://underscorejs.org
-            nltk
-            sklearn
-            numpy
-            os
+
             <ul>
                 <li>
                     <h6>
@@ -247,13 +249,13 @@
                         Danfo.js ist ein Open Source Framework, welches sich sehr stark an das bekannte Python
                         Framework
                         <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>
-                        anlehnt. Hierbei versucht es, möglichst gleichartige Interfaces bereit
-                        zu stellen, um Pandas Benutzern einen einfachen Einstieg zu bieten. Einsatzgebiet ist wie
-                        bei Pandas die Vor- und Nachverarbeitung von Daten aller Art unter Javascript. Im Rahmen diese
-                        Anwendung wird die mächtige Implemetierung einer
+                        anlehnt. Hierbei versucht es, möglichst gleichartige Interfaces bereitzustellen, um Pandas
+                        Benutzern einen einfachen Einstieg zu bieten. Einsatzgebiet ist wie bei Pandas die Vor- und
+                        Nachverarbeitung von Daten aller Art unter Javascript. Im Rahmen diese Anwendung wird die
+                        mächtige Implementierung einer
                         <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html" target="_blank">
-                            Pandas Series</a> für schnelle Sortierungen und Zugriffe auf die Ausgabe der Prediction
-                        verwendet.
+                            Pandas Series</a> für schnelle Sortierungen, Filterungen und Zugriffe auf die Ausgabe der
+                        Prediction verwendet.
                     </p>
                 </li>
 
@@ -276,10 +278,50 @@
                         <a href="https://keras.io/" target="_blank">Keras</a>
                     </h6>
                     <p class="fs-6">
-                        Bei Keras handelt es sich um eine ursprünglich separate Python Framework, welche bei recht
+                        Bei Keras handelt es sich um ein ursprünglich separates Python Framework, welches bei recht
                         hoher Abstraktion die Arbeit mit Tensorflow unterstützt. Als Tensorflows "Haussprache" ist sie
                         mittlerweile Teil des Tensorflow Frameworks. In dieser Lösung wird sie u.a. für den Zugriff auf
-                        Tensorflow und der Modellerstellung verwendet.
+                        Tensorflow und der Modellerstellung verwendet. Daneben bietet sie nützliche Tool wie
+                        beispielsweise
+                        <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file" target="_blank">
+                            get_file</a> zum einlesen von entfernten Dateien oder dem Laden vorgehaltener
+                        <a href="https://keras.io/api/datasets/" target="_blank">Standard DataSets</a>
+                        oder
+                        <a href="https://keras.io/api/applications/" target="_blank">vortrainierter Netze.</a>
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://www.nltk.org/" target="_blank">Natural Language Toolkit (NLTK)</a>
+                    </h6>
+                    <p class="fs-6">
+                        Ein bekanntes und weit verbreitetes Toolkit rund um die Arbeit mit natürlicher Sprache.
+                        Insbesondere lohnt sich ein Blick bei der Arbeit im Umfeld von Sentiment Analysis für die
+                        Datenvorverarbeitung. Bei dieser Aufgabe wird der word_tokenizer aus dem Paket
+                        <a href="https://www.nltk.org/api/nltk.tokenize.html" target="_blank">nltk.tokenize</a>
+                        verwendet, um den Quelltext unter Beachtung der Sprache in Token zu zerlegen.
+                    </p>
+                    <p class="fs-6">
+                        Im Verlauf der Arbeit bin ich zudem auf auf einen Blog gestoßen, welcher vier NLP Frameworks
+                        für die Verwendung mit JavaScript vorstellt. Auch wenn ich sie nicht gebrauche, klingen sie
+                        interessant, so dass ich darauf verweisen möchte:
+                        <a href="https://www.kommunicate.io/blog/nlp-libraries-node-javascript/"
+                           target="_blank">4Best NLP Libraries for Node.js and JavaScript
+                        </a>
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn</a>
+                    </h6>
+                    <p class="fs-6">
+                        Ein im Umfeld um Python etabliertes Ökosystem für Ressourcen und Tools im Umfeld von
+                        maschinelles Lernen und KI. Es basiert selbst wiederum auf grundlegenden Tools wie NumPy,
+                        SciPy und matplotlib. Im Rahmen dieser Lösung wird lediglich die Methode
+                        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html"
+                           target="_blank">CountVectorizer</a> genutzt, um einfach Text in geordnete Token zu zerlegen.
                     </p>
                 </li>
 
@@ -294,7 +336,8 @@
                         ausführliche API für Python findet sich
                         <a href="https://www.tensorflow.org/api_docs/python/tf" target="_blank">hier.</a>
                         Daneben werden C++, Java und andere Sprachen unterstützt. In dieser Lösung wurde es für die
-                        Entwicklung innerhalb des Jupyter Notebooks mit Python verwendet.
+                        Entwicklung innerhalb des Jupyter Notebooks mit Python verwendet sowie weiter gehend für den
+                        Export in ein von Tensorflow.js nutzbaren JSON Format.
                     </p>
                 </li>
 
@@ -318,6 +361,21 @@
                         Eine von den Entwicklern von TensorFlow.js auf GitHub gepflegte Bibliothek für die einfache
                         Visualisierung und Ausgabe von Daten. Eine ausführliche API findet sich
                         <a href="https://js.tensorflow.org/api_vis/latest/" target="_blank">hier.</a>
+                        Innerhalb dieser Aufgabe wird es beispielsweise für die Ausgabe der Netzstruktur auf JavaScript
+                        Seite verwendet.
+                    </p>
+                </li>
+
+                <li>
+                    <h6>
+                        <a href="https://underscorejs.org/" target="_blank">UNDERSCORE.JS</a>
+                    </h6>
+                    <p class="fs-6">
+                        Eine nette, kleine JavaScript Bibliothek um Dinge, wie eine nur einmalige Aufrufbarkeit einer
+                        Funktion (
+                        <a href="https://underscorejs.org/#once" target="_blank">siehe _.once</a>
+                        ) einfach zu implementieren. Sie wurde bei den ersten Codierungen verwendet, wird aber
+                        in der hier vorliegenden Lösung nicht mehr eingesetzt.
                     </p>
                 </li>
 
@@ -340,7 +398,30 @@
             </h5>
 
             <p class="fs-6">
-                Text
+                Die Umsetzung wurde auf Grund der rechenintensiven Arbeit und besseren Möglichkeiten aufgeteilt. Die
+                <strong>Vorverarbeitung</strong>
+                der zugrundeliegenden Textdaten, die <strong>Modellentwicklung</strong> und das
+                <strong>Training</strong>
+                erfolgte in einem <strong>Jupyter Notebook</strong> unter Verwendung von TensorFlow mit Python. Das so
+                trainierte neuronale Netz wurde im Anschluss in ein für TensorFlow.js verarbeitbares JSON Format
+                umgesetzt.
+            </p>
+
+            <p class="fs-6">
+                Für die <strong>webseitige Anwendung</strong> wurde primär auf <strong>Tensorflow.js</strong> und
+                JavaScript
+                zurück gegriffen um die Logik zur Eingabe und Vorhersage in einer Browseranwendung umzusetzen.
+            </p>
+
+            <p class="fs-6">
+                Insbesondere bei der Datenvorverarbeitung kamen in starkem Maße weitere Bibliotheken und Tools zum
+                Einsatz. Dies
+                bedeutet jedoch nicht, dass deren Einsatz alternativlos ist. Viele der Arbeiten können auch direkt und
+                einfach
+                ohne Hilfe umgesetzt werden. Insofern stellen sie eine Vereinfachung dar, bieten darüber hinaus aber
+                durch ihre
+                hohe Optimierung gerade bei großen Datenkontingenten einen nicht zu unterschätzenden
+                <strong>Performance</strong> und <strong>Qualitätsgewinn</strong> dar.
             </p>
 
             <h5>
@@ -350,18 +431,431 @@
             </h5>
 
             <p class="fs-6">
-                Text
+                Für die Lösung existiert keine eindeutig richtige oder falsche Lösung. Auch die hier vorgestellte Lösung
+                hat
+                somit Vor- aber auch Nachteile und kann sicherlich weiter optimiert werden. Hier musste ein Kompromiss
+                zwischen
+                Ergebnis und Zeitaufwand gemacht werden.
+            </p>
+
+            <p class="fs-6">
+                Es soll das nächste Wort auf Basis der bisherigen Wörter vorhergesagt werden. Das prinzipielle Vorgehen
+                in diesem
+                Fall ist hierbei grundsätzlich dahingehend, das einem neuronalen Netze das <strong>Wort (Label)
+                vorgegeben</strong> wird, das als Folge einer <strong>zeitlich aufeinanderfolgenden Eingabe von
+                Wörtern
+                (Features) erwartet wird</strong>. Für diese Aufgabe eignen sich einfache <strong>recurrente
+                Netze</strong>
+                oder aber deren Variation als <strong>Long Short-Term Memory (LSTM)</strong> Netz. Beide erfassen die
+                genannte
+                zeitliche Dimension.
+            </p>
+
+            <p class="fs-6">
+                LSTM Netze habe hierbei den Vorteil, das auch <strong>sehr kleine Gewichte erhalten bleiben</strong>.
+                Der
+                bei
+                einfachen recurrenten Netzen in Verbindung mit sehr kleinen Gewichten auftretende Effekt des <strong>weight
+                decay</strong> tritt hier auf Grund des <strong>inneren Aufbaus unter Verwendung von Speichern nicht
+                auf</strong>. Die hier vorliegende Lösung nutzt daher zum Erfassen der zeitlichen Abfolgen ein Netz
+                auf
+                Basis von LSTM.
+            </p>
+
+            <p class="fs-6">
+                Für das Training wurden reale <a href="https://github.com/ryanmcdermott/trump-speeches">Reden von Donald
+                Trump</a> verwendet, welche im Netz auf GitHub als Textversion frei verfügbar sind. Die Reden wurden als
+                <strong>utf-8</strong> eingelesen, um Umlaute nicht zu verlieren. Leere Zeilen und Zeilen, welche das
+                Wort
+                <strong>"SPEECH"</strong> enthalten und als Trenner zwischen den Reden stehen, wurden entfernt. <strong>Zeilenumbrüche</strong>
+                blieben erhalten. Für das Training wurden die <strong>ersten 100.000</strong> Zeichen des Textes
+                verwendet. Dies
+                beinhaltet auch Leerzeichen. Eine größere Anzahl ließ sich auf Grund mangelnder RAM Größe nicht ohne
+                weiteres
+                kostenlos verarbeiten. Netto beinhalten die 100.000 Zeichen <strong>22.716 Wörter</strong>.
+            </p>
+
+            <p class="fs-6">
+                Im zweiten Schritt wurden die vorkommenden eindeutigen Token extrahiert
+                (<strong><em>get_top_tokens()</em></strong>). Hierzu wurde die <strong>CountVectorizer</strong> Funktion
+                aus dem
+                <strong>skilearn Toolset</strong> verwendet. Er wurde so konfiguriert, dass alle vorkommenden <strong>Top
+                Features</strong> berücksichtigt wurden. Das Ergebnis ist eine Liste von <strong>2.484 eindeutigen
+                Token</strong>. Hierbei wurde <strong>Case Sensitive</strong> vorgegangen, um etwaige hier
+                verborgene
+                Semantik nicht zu verlieren. Aus dem gleichen Grund wurde der <strong>Punkt als Zeichen</strong>
+                berücksichtigt.
+                Die so erhaltenen Token bilden die <strong>Basis für zwei Dictionaries</strong>, welche jedem Wort eine
+                Ganzzahl
+                zuordnen und umgekehrt (<strong><em>set_dictionaries()</em></strong>).
+            </p>
+
+            <p class="fs-6">
+                Auf dieser Basis wurde der gesamte Text in eine <strong>Codesequenz umgewandelt</strong>, welche zum
+                Trainieren
+                geeignet ist (<strong><em>create_coded_token()</em></strong>). Die folgende Abbildung zeigt eine
+                Testausgabe zur
+                Demonstartion:
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-16-54-51-image.png"></p>
+
+            <p class="fs-6">
+                Eine wichtige zu treffende Entscheidung ist hierbei, auf <strong>wie vielen Worte</strong> man eine
+                Vorhersage
+                trainiert. Nimmt man nur <strong>ein Wort</strong>, so <strong>verliert man die Semantik</strong>, die
+                in einer
+                Folge von Wörter zu finden ist. Werden <strong>zu viele Wörter</strong> genommen, so berücksichtigt man
+                unter
+                Umständen <strong>Wörter</strong>, welche <strong>keinen Bezug zur eigentlichen Aussage haben</strong>
+                und das
+                Ergebnis ebenso verfälschen könnten.
+            </p>
+
+            <p class="fs-6">
+                Die vorliegende Lösung basiert auf <strong>drei zeitlich aufeinander folgenden Wörtern</strong>, welche
+                das
+                <strong>nächste Wort</strong> zugeordnet wird. Auf Basis dieser Festlegung wird ein <strong>Feature
+                Dataset</strong> mit jeweils drei Wörter und ein <strong>Label Dataset</strong> jeweils mit einem
+                Wort
+                erzeugt (<strong><em>create_trainings_data()</em></strong>,
+                <strong><em>split_training_data()</em></strong>).
+                Diese Festlegung wirkt sich auf das zu modellierende Netzwerk aus. Die folgende Abbildung zeigt eine
+                Testausgabe
+                der DataSets, welche das <strong>Sliden über den Daten</strong> nachvollziehbar macht:
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-16-55-11-image.png"></p>
+
+            <p class="fs-6">
+                Bei der Erstellung wird als erster Layer ein [<strong>Embedding Layer</strong>](<a
+                    href="https://keras.io/api/layers/core_layers/embedding/">Embedding layer</a>) von Keras gewählt.
+                Ihm werden
+                die zuvor erstellten <strong>unterschiedlichen Token</strong>, in diesem Fall <strong>2.484</strong>,
+                übergeben.
+                Diese werden auf <strong>150 Neuronen</strong> am Ausgang (<strong>output_dim</strong>) abgebildet. Der
+                <strong>dritte
+                    Parameter</strong> wird mit <strong><em>SLICE_LENGTH</em></strong>, hier <strong>3</strong> belegt.
+                Dies
+                entspricht der <strong>breite des Fensters</strong>, welches über die Daten geführt wird. Das Ergebnis
+                ist ein
+                <strong>Embedding und zugleich eine Eingangsschicht</strong>, die Keras im Hintergrund hinzufügt. Die
+                Nutzung
+                eines Embedding Layers hat neben einer <strong>Dimensionsreduktion</strong> auch den Vorteil, dass für
+                die
+                Eingabe <strong>kein One-Hot Encoding</strong> vorgesehen werden muss.
+            </p>
+
+            <p class="fs-6">
+                Als zweite und dritte Schicht folgen zwei [<strong>LSTM Schichten</strong>](<a
+                    href="https://keras.io/api/layers/recurrent_layers/lstm/">LSTM layer</a>) mit jeweils <strong>128
+                Neuronen</strong>. Der Parameter return_sequences gibt lediglich an, dass die Rückgabe noch weiter
+                verwendet
+                werden soll. In diesen Block wird die <strong>zeitliche Repräsentation gelernt</strong>.
+            </p>
+
+            <p class="fs-6">
+                Das Model schließt mit vier [<strong>Dense Layern</strong>](<a
+                    href="https://keras.io/api/layers/core_layers/dense/">Dense layer</a>) mit jeweils <strong>200
+                Neuronen</strong> und [<strong>Sigmoid</strong>](<a
+                    href="https://keras.io/api/layers/activations/#sigmoid-function">Layer activation functions</a>) als
+                Aktivierung ab. Hier wird auf Basis der gelernten zeitlichen Repräsentation <strong>weiter auf den Daten
+                gelernt</strong>. Im Folgenden ist der Code zur Erstellung des Models sowie die Ausgabe der
+                Schichten des
+                resultierenden Models zu sehen.
+            </p>
+
+            <p class="fs-6">
+                Der Code zur Erstellung des Modells:
+            </p>
+
+            <p><img alt="" src="assets/2022-06-24-20-04-21-image.png"></p>
+
+            <p class="fs-6">
+                Die resultierenden Schichten des oben definierten Modells:
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-16-56-04-image.png"></p>
+
+            <p class="fs-6">
+                Nach einem Training des Modells über <strong>100 Epochen</strong> bei <strong>32 Batches</strong> mit
+                einer Länge
+                von je <strong>710 Datenreihen</strong> wurde eine <strong>accuracy von 0,5149</strong> mit einem
+                <strong>Trend
+                    zu höheren Werten</strong> erreicht. Die folgende Abbildung zeigt die Entwicklung über die letzten
+                100
+                Epochen:
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-16-56-41-image.png"></p>
+
+            <p class="fs-6">
+                Als Ergebnis wird ein Vector mit den <strong>Wahrscheinlichkeiten der einzelnen Token</strong> zurück
+                gegeben.
+                Die unten stehende Abbildung zeigt ausschnittsweise die geordneten Ergebnisse für die Vorhersage,
+                basierend auf
+                den Wörtern "<strong>the</strong>", "<strong>Tea</strong>" sowie "<strong>Party</strong>". Zu sehen ist,
+                das mit
+                einer Wahrscheinlichkeit von über <strong>99%</strong> der <strong>Code 19</strong>, welcher für ein
+                Punkt
+                steht, erwartet wird.
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-17-06-13-image.png"></p>
+
+            <p class="fs-6">
+                Um das trainierte Netz weiter nutzen zu können, muss es nach dem Training zusammen mit seinen Gewichten
+                abgespeichert werden. Dies kann entweder mit der <strong>SaveModel()</strong> von Tensorflow im
+                <strong>TF2.x</strong> oder aber mit Keras' <strong>save()</strong> Methode und im <strong>HDF5</strong>
+                Format
+                geschehen. Beide Formate eignen sich nicht für Tensorflow.js. Hier wird ein <strong>JSON basiertes
+                Format</strong> mit <strong>einer oder mehreren Binärdateien</strong> erwartet. Die Konvertierung
+                kann
+                entweder auf <strong>Ebene der Kommandozeile</strong> oder aber <strong>direkt im Notebook</strong> mit
+                Hilfe
+                der Methode <strong>save_keras_model()</strong> erfolgen. Beide Wege werden [hier](<a
+                    href="https://www.tensorflow.org/js/tutorials/conversion/import_keras">Importieren eines
+                Keras-Modells
+                in TensorFlow.js</a>) beschrieben. Innerhalb der hier vorgestellten Lösung findet sich der
+                zugehörige Code
+                in der Methode <strong><em>save()</em></strong>.
+            </p>
+
+            <p class="fs-6">
+                Browserseitig erfolgt die Nutzung des konvertierten Modells <strong>wie ein Tensorflow.js natives
+                Modell</strong>.
+                Die <strong>Nutzereingabe</strong> wird <strong>in einzelne Wörter aufgesplittet</strong> und die
+                jeweils
+                <strong>letzten drei Wörter</strong> zur <strong>Vorhersage</strong> des nächsten Wortes verwand. Da das
+                aktuell
+                verwendete Modell auf Basis von drei Wörtern trainiert wurde, kann auch der Einsatz <strong>nur auf
+                einer
+                solchen Basis</strong> erfolgen. Ebenso müssen <strong>die beim Training verwendeten Codelisten für
+                die
+                Wörter verwendet werden</strong>.
+            </p>
+
+            <p class="fs-6">
+                Das folgende Bild zeigt die Vorhersage für die Wörter "<strong>who is doing</strong>", dem das Wort
+                "<strong>an</strong>" im Originaltext an mindestens einer Stelle folgt.
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-17-07-15-image.png"></p>
+
+            <p class="fs-6">
+                Bei der weiteren Eingabe wird, solange kein neues Wort entstanden ist, <strong>das vorherige Ergebnis
+                kontinuierlich weiter gefiltert</strong> und Treffer in absteigender Wahrscheinlichkeit angezeigt.
+            </p>
+
+            <p><img alt="" src="assets/2022-06-25-17-07-47-image.png"></p>
+
+            <p class="fs-6">
+                Eine Eingabe wird hierbei erst als <strong>neues Wort</strong> übernommen, <strong>wenn ein Leerzeichen
+                eingegeben wird</strong>. In diesem Fall wird eine <strong>neue Vorhersage</strong> ausgeführt. Über die
+                Textfelder der Webanwendung kann dieser Vorgang gut verfolgt werden.
             </p>
 
             <h5>
                 <strong>
-                    Ergebnisse
+                    Ergebnis
                 </strong>
             </h5>
 
             <p class="fs-6">
-                Text
+                Als ein Ergebnis kann hier festgehalten werden, dass selbst mit einem Modell von lediglich 0,5149
+                Genauigkeit
+                bereits überraschende und nicht erwartete Ergebnisse und Vorhersagen gelingen.
             </p>
+            <p class="fs-6">
+                Im Folgenden wird an vier Beispielen die Vorhersage auf Basis des <strong>Originaltextes</strong> näher
+                betrachtet:
+            </p>
+            <p class="fs-6">
+                <em>Again, the politicians talk about it and they do nothing about it. Benghazi. Oh, Benghazi, Benghazi.
+                    Everything is Benghazi. What happens? Nothing.
+                    IRS, e-mails. I get <strong>sued all the</strong> time, okay. I run a big business. You know I've
+                    always
+                    said
+                    it's very, very hard for a person who is very successful. I have done so many deals. Almost all of
+                    them
+                    have
+                    been tremendously successful. You'll see that when I <strong>file my statements</strong>. I mean you
+                    will see;
+                    you will be very proud of me, okay. But I've always said, and I said it strongly, it's very hard for
+                    somebody
+                    that does tremendous numbers of deals to run for politics, run for political office, any office, let
+                    alone
+                    president. Because you've done so much; you've beaten so many people; you've created so many-- Look,
+                    Obama, what
+                    did he do? No deal. He <strong>never did a</strong> deal. He did one deal. A house. And if you did
+                    that
+                    house
+                    you'd be in jail right now, okay. He got away with murder. But I can tell you, e-mails. IRS, the
+                    e-mails,
+                    thousands of them, they were lost; they were lost. If you were in my world you would know that
+                    e-mails
+                    can't be
+                    lost; they can't be lost. So why aren't our politicians finding out where those e-mails are?</em>
+            </p>
+
+            <p class="fs-6">
+                <strong>Satz 1:</strong>
+            </p>
+            <p class="fs-6">
+                Eingabe: sued all the [time]
+                Vorhersage:
+            </p>
+            <ul>
+                <li><strong><em>time (10.1650 %)</em></strong></li>
+                <li>way (7.2109 %)</li>
+                <li>terrorism (6.5770 %)</li>
+                <li>agreements (3.2987 %)</li>
+                <li>one (2.9743 %)</li>
+            </ul>
+
+            <p class="fs-6">
+                <strong>Satz 2:</strong>
+            </p>
+            <p class="fs-6">
+                Eingabe: never did a [deal]
+                Vorhersage:
+            </p>
+            <ul>
+                <li>long (11.2935 %)</li>
+                <li>weapons (9.9087 %)</li>
+                <li>statement (7.3971 %)</li>
+                <li>great (6.1590 %)</li>
+                <li>very (5.5132 %)</li>
+            </ul>
+            <p class="fs-6">
+                In der Tat scheint hier das neuronale Netz auch im weiteren Bereich davor keinen sinnvollen Treffer zu
+                finden.
+            </p>
+
+            <p class="fs-6">
+                <strong>Satz 3:</strong>
+            </p>
+            <p class="fs-6">
+                Eingabe: file my statements [.]
+                Vorhersage:
+            </p>
+            <ul>
+                <li><strong><em>. (99.9843 %)</em></strong></li>
+                <li>, (0.0038 %)</li>
+                <li>? (0.0036 %)</li>
+                <li>again (0.0030 %)</li>
+                <li>and (0.0025 %)</li>
+            </ul>
+
+            <p class="fs-6">
+                <strong>Satz 4:</strong>
+            </p>
+            <p class="fs-6">
+                Eingabe: if you did [that]
+                Vorhersage:
+            </p>
+            <ul>
+                <li><strong><em>that (78.3524 %)</em></strong></li>
+                <li>? (3.6557 %)</li>
+                <li>is (3.2053 %)</li>
+                <li>you (2.0153 %)</li>
+                <li>believe (1.7135 %)</li>
+            </ul>
+
+            <p class="fs-6">
+                Auch bei einer total missglückten Vorhersage im zweiten Satz ist das Ergebnis auf den ersten Blick
+                beeindruckend.
+                Für eine genauere Bewertung müsste indes das Ergebnis umfangreicher und systematischer evaluiert
+                werden.
+            </p>
+
+            <h5>
+                <strong>
+                    Ausblick
+                </strong>
+            </h5>
+
+            <p class="fs-6">
+                Wie das zuvor dargestellte Ergebnis andeutet, sind die <strong>Möglichkeiten bei weitem noch nicht
+                ausgeschöpft</strong>, sondern lediglich auf Grund des Zeitrahmens und Umfangs dieser Arbeit nicht
+                berücksichtigt. Insbesondere Folgende Punkte könnten sich positiv auf das Ergebnis auswirken und sollten
+                bei einer Optimierung betrachtet werden:
+            </p>
+            <ol>
+                <li>
+                    <p class="fs-6">
+                        Es sollte <strong>systematisch geschaut</strong> werden, inwieweit sich eine <strong>größere
+                        Wortmenge</strong> oder aber ein <strong>größeres Fenster</strong> positiv auf die Vorhersage
+                        auswirkt und
+                        wo hierbei eine Grenze zu finden ist. Hierzu sollte das Netz als erstes mit einer Fenstergröße
+                        von <strong>fünf</strong>,
+                        dann <strong>zehn</strong> trainiert werden um zu sehen, ob sich vielleicht ein Trend
+                        abzeichnet. Ebenso
+                        sollte die <strong>Größe des verwendeten Textes</strong> vergrößert werden. Hierzu muss ggf. die
+                        Vorverarbeitung des Textkorpus erweitert werden.
+                    </p>
+                </li>
+                <li>
+                    <p class="fs-6">
+                        Die vorliegende Lösung setzt auf die <strong>Berücksichtigung von Satzzeichen sowie der Groß-
+                        und
+                        Kleinschreibung</strong>. Alternativ kann der Ansatz untersucht werden, sich <strong>lediglich
+                        auf die
+                        Wörter selbst</strong> zu konzentrieren.
+                    </p>
+                </li>
+                <li>
+                    <p class="fs-6">
+                        Bei der Nutzereingabe erfolgt eine Aufspaltung der Wörter in einzelne Token <strong>auf Basis
+                        von
+                        Leerzeichen</strong>. Dies ist leider keine optimale Lösung und kann optimiert werden. Ein
+                        erster Schritt
+                        währe, die Aufsplittung <strong>exakt in der gleichen Logik wie bei den Trainingsdaten</strong>
+                        umzusetzen.
+                        Die folgende Abbildung ist ein Ausschnitt aus der Testausgabe der Aufsplittung.
+                    </p>
+
+                    <p><img alt="" src="assets/2022-06-25-17-53-05-image.png"></p>
+
+                    <p class="fs-6">
+                        Token wie " <strong><em>'s</em></strong> ", " <strong><em>n't</em></strong> " oder aber "
+                        <strong><em>That'</em></strong>
+                        " fallen hier auf. Mit Hilfe entsprechender Tools aus dem <strong><em>Natural Language
+                        Processing (NLP)
+                        Bereich</em></strong> können englische Texte <strong>grammatikalisch korrekt</strong> gut
+                        gesäubert
+                        und <strong>zusammen gezogene Wörter</strong> wieder als <strong>zwei Wörter</strong> ausgegeben
+                        werden.
+                        Hilfsweise kann auch mit Suchen und Ersetzen gearbeitet werden.
+                    </p>
+                </li>
+                <li>
+                    <p class="fs-6">
+                        Bei der <strong>Vorhersage</strong> auf Basis eines <strong>noch nicht beendeten Wortes</strong>
+                        können
+                        Optimierungen lohnen. Beispielsweise könnte mit Hilfe eines <strong>separaten, weiteren
+                        neuronalen
+                        Netzes</strong>, vielleicht <strong>auf Basis der Buchstaben</strong>, anhand der Eingabe auf
+                        <strong>weitere
+                            Wörter geschlossen</strong> werden und im Anschluss auf dieser Basis eine <strong>neue
+                        Vorhersage</strong> erstellt werden.
+                    </p>
+                </li>
+                <li>
+                    <p class="fs-6">
+                        Bei der Modellierung selbst kann versucht werden, mit Hilfe der <strong>Hyperparamter</strong>
+                        das Netz
+                        weiter zu optimieren. In dieser Lösung wurde hier eher zurückhaltend vorgegangen. Erste Versuche
+                        könnten in
+                        Richtung <strong>Batchgröße</strong>, <strong>Epochen</strong> beim Training sowie der
+                        Konfiguration des
+                        <strong>Embedded Layer</strong> gehen, später in Richtung <strong>Optimierer</strong>,
+                        <strong>Aktivierung</strong> und <strong>Anzahl der Neuronen</strong>. Bei der hier gezeigten
+                        Datenmenge ist
+                        dies noch vertretbar.
+                    </p>
+                </li>
+            </ol>
 
         </div>
 

@@ -1,2 +1,2 @@
 https://www.youtube.com/watch?v=VB7bbFIEAhk
-https://underscorejs.org
+https://www.kommunicate.io/blog/nlp-libraries-node-javascript/
