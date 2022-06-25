@@ -24,7 +24,8 @@ Trainingsdaten Wortvorhersagen (Next Word Prediction) machen kann.
 
 Die Umsetzung wurde auf Grund der rechenintensiven Arbeit und besseren Möglichkeiten aufgeteilt. Die **Vorverarbeitung**
 der zugrundeliegenden Textdaten, die **Modellentwicklung** und das **Training** erfolgte in
-einem **[Jupyter Notebook]("https://github.com/ChristianKitte/DeepLearningWordPrediction/blob/main/Wortvorhersage.ipynb")**
+einem [**Jupyter
+Notebook**](https://github.com/ChristianKitte/DeepLearningWordPrediction/blob/main/Wortvorhersage.ipynb)
 unter Verwendung von TensorFlow mit Python. Das so trainierte neuronale Netz wurde im Anschluss in ein für TensorFlow.js
 verarbeitbares JSON Format umgesetzt.
 
