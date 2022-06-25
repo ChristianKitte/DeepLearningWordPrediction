@@ -21,7 +21,7 @@ Mit Hilfe eines Recurrenten Neuronalen Netzwerks (RNN) soll ein Modell erzeugt w
 
 ## Umsetzung
 
-Die Umsetzung wurde auf Grund der rechenintensiven Arbeit und besseren Möglichkeiten aufgeteilt. Die **Vorverarbeitung** der zugrundeliegenden Textdaten, die **Modellentwicklung** und das **Training** erfolgte in einem **Jupyter Notebook** unter Verwendung von TensorFlow mit Python. Das so trainierte neuronale Netz wurde im Anschluss in ein für TensorFlow.js verarbeitbares JSON Format umgesetzt. 
+Die Umsetzung wurde auf Grund der rechenintensiven Arbeit und besseren Möglichkeiten aufgeteilt. Die **Vorverarbeitung** der zugrundeliegenden Textdaten, die **Modellentwicklung** und das **Training** erfolgte in einem [**Jupyter Notebook**]("https://github.com/ChristianKitte/DeepLearningWordPrediction/blob/main/Wortvorhersage.ipynb") unter Verwendung von TensorFlow mit Python. Das so trainierte neuronale Netz wurde im Anschluss in ein für TensorFlow.js verarbeitbares JSON Format umgesetzt. 
 
 Für die **webseitige Anwendung** wurde primär auf **Tensorflow.js** und JavaScript zurück gegriffen um die Logik zur Eingabe und Vorhersage in einer Browseranwendung umzusetzen.
 
