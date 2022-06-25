@@ -402,7 +402,11 @@
                 <strong>Vorverarbeitung</strong>
                 der zugrundeliegenden Textdaten, die <strong>Modellentwicklung</strong> und das
                 <strong>Training</strong>
-                erfolgte in einem <strong>Jupyter Notebook</strong> unter Verwendung von TensorFlow mit Python. Das so
+                erfolgte in einem <strong>
+                <a href="https://github.com/ChristianKitte/DeepLearningWordPrediction/blob/main/Wortvorhersage.ipynb"
+                   target="_blank">
+                    Jupyter Notebook</a>
+            </strong> unter Verwendung von TensorFlow mit Python. Das so
                 trainierte neuronale Netz wurde im Anschluss in ein für TensorFlow.js verarbeitbares JSON Format
                 umgesetzt.
             </p>
@@ -528,8 +532,9 @@
             <p><img alt="" src="assets/2022-06-25-16-55-11-image.png"></p>
 
             <p class="fs-6">
-                Bei der Erstellung wird als erster Layer ein [<strong>Embedding Layer</strong>](<a
-                    href="https://keras.io/api/layers/core_layers/embedding/">Embedding layer</a>) von Keras gewählt.
+                Bei der Erstellung wird als erster Layer ein <strong>
+                <a href="https://keras.io/api/layers/core_layers/embedding/" target="_blank">Embedding layer</a>
+            </strong>] von Keras gewählt.
                 Ihm werden
                 die zuvor erstellten <strong>unterschiedlichen Token</strong>, in diesem Fall <strong>2.484</strong>,
                 übergeben.
@@ -547,22 +552,22 @@
             </p>
 
             <p class="fs-6">
-                Als zweite und dritte Schicht folgen zwei [<strong>LSTM Schichten</strong>](<a
-                    href="https://keras.io/api/layers/recurrent_layers/lstm/">LSTM layer</a>) mit jeweils <strong>128
+                Als zweite und dritte Schicht folgen zwei
+                <strong><a href="https://keras.io/api/layers/recurrent_layers/lstm/" target="_blank">
+                    LSTM layer</a></strong> mit jeweils <strong>128
                 Neuronen</strong>. Der Parameter return_sequences gibt lediglich an, dass die Rückgabe noch weiter
                 verwendet
                 werden soll. In diesen Block wird die <strong>zeitliche Repräsentation gelernt</strong>.
             </p>
 
             <p class="fs-6">
-                Das Model schließt mit vier [<strong>Dense Layern</strong>](<a
-                    href="https://keras.io/api/layers/core_layers/dense/">Dense layer</a>) mit jeweils <strong>200
-                Neuronen</strong> und [<strong>Sigmoid</strong>](<a
-                    href="https://keras.io/api/layers/activations/#sigmoid-function">Layer activation functions</a>) als
-                Aktivierung ab. Hier wird auf Basis der gelernten zeitlichen Repräsentation <strong>weiter auf den Daten
-                gelernt</strong>. Im Folgenden ist der Code zur Erstellung des Models sowie die Ausgabe der
-                Schichten des
-                resultierenden Models zu sehen.
+                Das Model schließt mit vier <strong>
+                <a href="https://keras.io/api/layers/core_layers/dense/" target="_blank">Dense layer</a> </strong>
+                mit jeweils <strong>200 Neuronen</strong> und
+                <strong> <a href="https://keras.io/api/layers/activations/#sigmoid-function" target="_blank">Sigmoid</a>
+                </strong> ) als Aktivierung ab. Hier wird auf Basis der gelernten zeitlichen Repräsentation
+                <strong>weiter auf den Daten gelernt</strong>. Im Folgenden ist der Code zur Erstellung des Models sowie
+                die Ausgabe der Schichten des resultierenden Models zu sehen.
             </p>
 
             <p class="fs-6">
@@ -613,11 +618,9 @@
                 kann
                 entweder auf <strong>Ebene der Kommandozeile</strong> oder aber <strong>direkt im Notebook</strong> mit
                 Hilfe
-                der Methode <strong>save_keras_model()</strong> erfolgen. Beide Wege werden [hier](<a
-                    href="https://www.tensorflow.org/js/tutorials/conversion/import_keras">Importieren eines
-                Keras-Modells
-                in TensorFlow.js</a>) beschrieben. Innerhalb der hier vorgestellten Lösung findet sich der
-                zugehörige Code
+                der Methode <strong>save_keras_model()</strong> erfolgen. Beide Wege werden
+                <a href="https://www.tensorflow.org/js/tutorials/conversion/import_keras" target="_blank">hier</a>
+                beschrieben. Innerhalb der hier vorgestellten Lösung findet sich der zugehörige Code
                 in der Methode <strong><em>save()</em></strong>.
             </p>
 
@@ -663,8 +666,7 @@
 
             <p class="fs-6">
                 Als ein Ergebnis kann hier festgehalten werden, dass selbst mit einem Modell von lediglich 0,5149
-                Genauigkeit
-                bereits überraschende und nicht erwartete Ergebnisse und Vorhersagen gelingen.
+                Genauigkeit bereits überraschende und nicht erwartete Ergebnisse und Vorhersagen gelingen.
             </p>
             <p class="fs-6">
                 Im Folgenden wird an vier Beispielen die Vorhersage auf Basis des <strong>Originaltextes</strong> näher
@@ -702,8 +704,7 @@
                 <strong>Satz 1:</strong>
             </p>
             <p class="fs-6">
-                Eingabe: sued all the [time]
-                Vorhersage:
+                Eingabe: sued all the [time], Vorhersage:
             </p>
             <ul>
                 <li><strong><em>time (10.1650 %)</em></strong></li>
@@ -717,8 +718,7 @@
                 <strong>Satz 2:</strong>
             </p>
             <p class="fs-6">
-                Eingabe: never did a [deal]
-                Vorhersage:
+                Eingabe: never did a [deal], Vorhersage:
             </p>
             <ul>
                 <li>long (11.2935 %)</li>
@@ -736,8 +736,7 @@
                 <strong>Satz 3:</strong>
             </p>
             <p class="fs-6">
-                Eingabe: file my statements [.]
-                Vorhersage:
+                Eingabe: file my statements [.], Vorhersage:
             </p>
             <ul>
                 <li><strong><em>. (99.9843 %)</em></strong></li>
@@ -751,8 +750,7 @@
                 <strong>Satz 4:</strong>
             </p>
             <p class="fs-6">
-                Eingabe: if you did [that]
-                Vorhersage:
+                Eingabe: if you did [that], Vorhersage:
             </p>
             <ul>
                 <li><strong><em>that (78.3524 %)</em></strong></li>
